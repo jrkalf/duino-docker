@@ -1,0 +1,33 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: duino-coin
+  labels:
+    app: duino-coin
+spec:
+  replicas: 1
+  #strategy: Recreate
+  selector:
+    matchLabels:
+      deploy: duino-coin
+  template:
+    metadata:
+      labels:
+        deploy: duino-coin
+    spec:
+      containers:
+        - name: duino-coin
+          image: docker.io/jrkalf/duino-docker:1.0
+          env:
+            - name: THREADS
+              value: "4"
+            - name: DIFFICULTY
+              value: MEDIUM
+            - name: RIG
+              value: GithubGuests
+            - name: INTENSITY
+              value: "25"
+            - name: KEY
+              value: None
+            - name: USERNAME
+              value: helix77
